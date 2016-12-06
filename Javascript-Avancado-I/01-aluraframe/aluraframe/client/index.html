@@ -59,6 +59,13 @@
         </tfoot>
     </table>
      <!-- código anterior omitido -->
-    <script src="js/index.js"></script>
+    <script src="js/app/models/Negociacao.js"></script>
+    <script>
+        var hoje = new Date();
+        var n1 = new Negociacao(hoje, 1, 100.00);
+        console.log(n1.data);
+        hoje.setDate(hoje.getDate() + 2);
+        console.log(n1.data); // alterou a data da negociação!
+    </script>
 </body>
 </html>
