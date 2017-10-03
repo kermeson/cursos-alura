@@ -6,49 +6,43 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
-        let self = this;
-
+        this._listaNegociacoes = new ListaNegociacoes( model => {
+            this._negociacoesView.update(model);
+        });
 
         this._negociacoesView = new NegociacoesView($('#negociacoesView'));
-
-        this._listaNegociacoes = new Bind(
-            new ListaNegociacoes(),
-            this._negociacoesView,
-            'adiciona', 'esvazia');
-
-
+        this._negociacoesView.update(this._listaNegociacoes);
+        this._mensagem = new Mensagem();
         this._mensagemView = new MensagemView($('#mensagemView'));
-        this._mensagem = new Bind(
-            new Mensagem(),
-            this._mensagemView,
-            'texto');
-
     }
 
     adiciona(event) {
 
         event.preventDefault();
-
+     
         this._listaNegociacoes.adiciona(this._criaNegociacao());
+     
+        // atualiza a view a cada inclusão para que reflete o estado atual da nossa lista de negociações
+        this._negociacoesView.update(this._listaNegociacoes);
 
         this._mensagem.texto = 'Negociação adicionada com sucesso.';
-
+        this._mensagemView.update(this._mensagem);
 
         this._limparFormulario();
 
     }
 
-    _criaNegociacao() {
-        return new Negociacao(
+    _criaNegociacao() { 
+        return  new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
             this._inputValor.value
-        );
+        );         
     }
 
     _limparFormulario() {
         this._inputData.value = '';
-        this._inputQuantidade.value = 1;
+        this._inputQuantidade.value = 1; 
         this._inputValor.value = 0;
         this._inputData.focus();
     }
@@ -56,9 +50,9 @@ class NegociacaoController {
     apaga() {
         // esvazia a lista
         this._listaNegociacoes.esvazia();
-
+        
         // exibe uma nova mensagem
         this._mensagem.texto = "Negociações removidas com sucesso";
-
+       
     }
 }
