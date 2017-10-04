@@ -6,6 +6,9 @@ class NegociacaoController {
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
+
+       
+
         let self = this;
 
 
@@ -61,4 +64,31 @@ class NegociacaoController {
         this._mensagem.texto = "Negociações removidas com sucesso";
 
     }
+
+
+
+
+    importaNegociacoes() {
+
+        let service = new NegociacaoService();
+
+        Promise.all([
+            service.obterNegociacoesDaSemana(),
+            service.obterNegociacoesDaSemanaAnterior(),
+            service.obterNegociacoesDaSemanaRetrasada()]
+        ).then(negociacoes => {
+
+            negociacoes.reduce( (arrayAchatado, array) => arrayAchatado.concat(array), [])
+                .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao));
+
+        })
+            .catch(erro => this._mensagem.texto = erro);
+
+
+
+
+
+
+    }
+
 }
