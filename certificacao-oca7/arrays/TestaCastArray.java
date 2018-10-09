@@ -15,13 +15,18 @@ class TestaCastArray {
         }
 
 
-        B[] valores2 = new B[2];
-        valores2[0] = new B();;
+        B[] valoresB = new B[2];
+        valoresB[0] = new B();;
         
 
-        A[] vals2 = valores2;
-        System.out.println(valores2.getClass().getName());
-        System.out.println(vals2.getClass().getName());
+        A[] valoresA = valoresB;
+        System.out.println(valoresB.getClass().getName());
+        System.out.println(valoresA.getClass().getName());
+
+        System.out.println(valoresA.equals(valoresB));
+
+        A[] valsA = new A[2];
+        B[] valsB = (B[])valsA;
        
         
     }

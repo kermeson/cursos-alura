@@ -25,17 +25,27 @@ public class ArrayInitialize {
         long zyx[][] = new long[3][10];
         int[] x = new int[20];
         int[] y = new int[10];
-       // String[] z = new String[30];
+        int[] z = new int[30];
 
         System.out.println(zyx[2].length);
 
-        zyx[0] = (long[]) x;
-        zyx[1] = y;
-       // zyx[2] = z;
+        // zyx[0] = x;
+        // zyx[1] = y;
+        // zyx[2] = z;
         System.out.println(zyx[2].length);
 
        
-       
+       int xi = 10;
+       long xl = xi;
+
+       long[] arraylong = { 2, 3 };
+
+       int[] arrayint = { 
+           2, 3 
+        };
+
+    //   arraylong = arrayint;
+
          //int[][][] cubo = new int[][][]; 
         //int[][][] cubo = new int[2][][];
 
