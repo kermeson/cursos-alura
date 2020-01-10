@@ -1,2 +1,3 @@
 *.class
 .vscode/*
+sass/site-apeperia-webpack/node_modules/*
