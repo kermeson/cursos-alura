@@ -1,34 +1,7 @@
-//variáveis do sass
-$cor-padrao: #c24e4b;
-$cor-auxiliar: tomato;
-$cor-branca: #fff;
-$raio-grande: 50px;
+@import 'helpers/variaveis';
+@import 'helpers/mixins';
 
-//mixins do sass
-@mixin borda-arredondada($raio: 0.3em) {
-  -webkit-border-radius: $raio;
-  border-radius: $raio;
-}
-
-@mixin sombra-padrao {
-  -webkit-box-shadow: 0 2px 6.65px 0.35px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 6.65px 0.35px rgba(0, 0, 0, 0.3);
-}
-
-@mixin image-replacement {
-  text-indent: -9999px;
-  overflow: hidden;
-  background-repeat: no-repeat;
-}
-
-@mixin background-footer {
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-}
+@import 'base/normalize';
 
 /** Geral **/
 body {
@@ -70,31 +43,36 @@ header .container {
   position: relative;
 }
 
+//Aninhamento scss
 .menu-opcoes {
   position: absolute;
   right: 0;
   top: -.5em;
   font-size: 1.2em;
   font-weight: lighter;
+
+  ul {
+    padding-left: 0;
+  }
+  
+  li {
+    display: inline-block;
+    width: 5em;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  
 }
 
-.menu-opcoes ul {
-  padding-left: 0;
-}
 
-.menu-opcoes li {
-  display: inline-block;
-  width: 5em;
-}
-
-.menu-opcoes a {
-  color: white;
-  text-decoration: none;
-}
-
-.menu-opcoes a:hover {
-  text-decoration: underline;
-}
 
 /** Destaque **/
 .destaque {
@@ -165,7 +143,7 @@ header .container {
   display: inline-block;
   width: 50px;
   height: 60px;
-  @include image-replacement();
+  @extend %image-replacement;
   background-position: center;
   margin: 1em 1.5em 0 0;
 }
@@ -223,6 +201,7 @@ header .container {
   font-size: 2.75em;
 }
 
+//Aninhamento
 .itens-plano {
   padding-left: 1.2em;
 
@@ -421,7 +400,7 @@ footer a {
   display: block;
   width: 55px;
   height: 55px;
-  @include image-replacement;
+  @extend %image-replacement;
   margin-left: 1em;
 }
 
@@ -441,3 +420,5 @@ footer a {
 .social a[href*="instagram"] {
   background-image: url(../imagens/instagram.png);
 }
+
+@import "base/media-queries.scss";
