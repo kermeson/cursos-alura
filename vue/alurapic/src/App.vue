@@ -1,64 +1,44 @@
 <template>
   <div class="corpo">
-    <h1 class="titulo">{{ name }}</h1>
-    <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto of fotos" :key="foto.titulo">
-        <meu-painel :titulo="foto.titulo">
-          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo" />
-        </meu-painel>
-      </li>
-    </ul>
+    <meu-menu :routes="routes" />
+    <transition name="pagina">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
 <script>
-import Painel from "./components/shared/Painel";
+import routes from "./routes";
+import Menu from "./components/shared/Menu";
 
 export default {
-  name: "app",
+  data: () => ({
+    routes
+  }),
   components: {
-    "meu-painel": Painel
-  },
-  data() {
-    return {
-      name: "Projeto AluraPicure",
-      fotos: []
-    };
-  },
-  created() {
-    this.$http
-      .get("http://localhost:3000/v1/fotos")
-      .then(res => res.json())
-      .then(
-        res => (this.fotos = res),
-        err => console.log(err)
-      );
+    "meu-menu": Menu
   }
 };
 </script>
 
 <style>
+.corpo {
+  font-family: Helvetica, sans-serif;
+  margin: 0 auto;
+  width: 96%;
+}
 
-  .titulo {
-    text-align: center;
-  }
+.pagina-enter,
+.pagina-leave-active {
+  opacity: 0;
+}
+.pagina-enter,
+.pagina-leave-active {
+  opacity: 0;
+}
 
-  .corpo {
-    font-family: Helvetica, sans-serif;
-    margin: 0 auto;
-    width: 96%;
-  }
-
-  .lista-fotos {
-    list-style: none;
-  }
-
-  .lista-fotos .lista-fotos-item {
-    display: inline-block;
-  }
-
-  .imagem-responsiva {
-    width: 100%;
-  }
-
+.pagina-enter-active,
+.pagina-leave-active {
+  transition: opacity 0.4s;
+}
 </style>
