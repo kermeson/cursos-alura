@@ -8,6 +8,8 @@
       <li class="lista-fotos-item" v-for="foto of fotosFiltradas" :key="foto.titulo">
         <meu-painel :titulo="foto.titulo">
          <minha-imagem :src="foto.url" :titulo="foto.titulo" ></minha-imagem>
+         <meu-botao tipo="button" rotulo="remover" @botaoAtivado="remove(foto)"
+         estilo="perigo" :confirmacao="true" />
         </meu-painel>
       </li>
     </ul>
@@ -17,12 +19,14 @@
 <script>
 import Painel from "./shared/Painel";
 import ImagemResponsiva from "./shared/ImagemResponsiva"
+import Button from "./shared/Button"
 
 export default {
   name: "app",
   components: {
     "meu-painel": Painel,
-    "minha-imagem": ImagemResponsiva
+    "minha-imagem": ImagemResponsiva,
+    "meu-botao": Button
   },
   data() {
     return {
@@ -50,6 +54,13 @@ export default {
       }
     }
 
+  },
+  methods: {
+    remove(foto) {
+     
+        alert(foto.titulo);
+     
+    }
   }
 };
 </script>
