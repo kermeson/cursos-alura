@@ -1,15 +1,97 @@
 <template>
-  <h2 class="centralizado">Cadastro</h2>
+
+  <div>
+    <h1 class="centralizado">Cadastro</h1>
+    <h2 class="centralizado">{{ foto.titulo }}</h2>
+
+    <form @submit="grava()">
+      <div class="controle">
+        <label for="titulo">TÍTULO</label>
+        <input id="titulo" autocomplete="off"
+          @blur="foto.titulo = $event.target.value" :value="foto.titulo" />
+      </div>
+
+      <div class="controle">
+        <label for="url">URL</label>
+        <input id="url" autocomplete="off" v-model.lazy="foto.url" />
+        <imagem-responsiva v-show="foto.url" :src="foto.url" :titulo="foto.titulo"/>
+      </div>
+
+      <div class="controle">
+        <label for="descricao">DESCRIÇÃO</label>
+        <textarea id="descricao" autocomplete="off" v-model.lazy="foto.descricao"></textarea>
+      </div>
+
+      <div class="centralizado">
+        <meu-botao rotulo="GRAVAR" tipo="submit"/>
+        <router-link :to="{ name: 'home'}"><meu-botao rotulo="VOLTAR" tipo="button"/></router-link>
+      </div>
+
+    </form>
+  </div>
 </template>
 
 <script>
+
+import ImagemResponsiva from './shared/ImagemResponsiva.vue'
+import Botao from './shared/Button.vue';
+import Foto from '../domain/foto/Foto';
+import FotoService from '../domain/foto/FotoService'
+
 export default {
 
-}
-</script>
+  components: {
+    'imagem-responsiva': ImagemResponsiva, 
+    'meu-botao': Botao
+  },
 
-<style>
-.centralizado {   
-    text-align: center; 
+  data() {
+    return {
+      foto: new Foto(),
+      id: this.$route.params.id      
+    }
+  },
+
+  methods: {
+    grava() {      
+      this.fotoService.cadastra(this.foto)
+        .then(() => this.foto = new Foto(), err => console.log(err));
+
+    }
+  },
+
+  created() {
+    this.fotoService = new FotoService(this.$resource);
+    if (this.id) {
+      this.fotoService.busca(this.id).then((foto) => this.foto = foto);
+    }
+  }
 }
+
+</script>
+<style scoped>
+
+  .centralizado {
+    text-align: center;
+  }
+  .controle {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+
+  }
+  .controle label {
+    display: block;
+    font-weight: bold;
+  }
+
+ .controle label + input, .controle textarea {
+    width: 100%;
+    font-size: inherit;
+    border-radius: 5px
+  }
+
+  .centralizado {
+    text-align: center;
+  }
+
 </style>

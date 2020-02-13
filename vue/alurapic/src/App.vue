@@ -13,7 +13,7 @@ import Menu from "./components/shared/Menu";
 
 export default {
   data: () => ({
-    routes
+    routes: routes.filter((r)=> r.menu)
   }),
   components: {
     "meu-menu": Menu

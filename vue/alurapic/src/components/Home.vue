@@ -1,13 +1,17 @@
 <template>
   <div>
     <h1 class="titulo">{{ name }}</h1>
+
+    <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
+
     <input type="search" placeholder="pesquise pelo título da foto" class="filtro"
     @input="filtro = $event.target.value" />
 
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosFiltradas" :key="foto.titulo">
         <meu-painel :titulo="foto.titulo">
-         <minha-imagem :src="foto.url" :titulo="foto.titulo" ></minha-imagem>
+         <minha-imagem :src="foto.url" :titulo="foto.titulo" v-meu-transform="{ animacao: true, incremento: 15 }"></minha-imagem>
+         <router-link :to="{ name: 'altera', params: { id: foto._id }}"><meu-botao tipo="button" rotulo="alterar" /></router-link>
          <meu-botao tipo="button" rotulo="remover" @botaoAtivado="remove(foto)"
          estilo="perigo" :confirmacao="true" />
         </meu-painel>
@@ -20,6 +24,7 @@
 import Painel from "./shared/Painel";
 import ImagemResponsiva from "./shared/ImagemResponsiva"
 import Button from "./shared/Button"
+import FotoService from '../domain/foto/FotoService'
 
 export default {
   name: "app",
@@ -32,14 +37,13 @@ export default {
     return {
       name: "Projeto AluraPicure",
       fotos: [],
-      filtro: ''
+      filtro: '',
+      mensagem: ''
     };
   },
   created() {
-    this.$http
-      .get("http://localhost:3000/v1/fotos")
-      .then(res => res.json())
-      .then(
+    this.fotoService = new FotoService(this.$resource);
+    this.fotoService.lista().then(
         res => (this.fotos = res),
         err => console.log(err)
       );
@@ -58,7 +62,21 @@ export default {
   methods: {
     remove(foto) {
      
-        alert(foto.titulo);
+       this.$http
+        .delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+        .then(() => {
+            // assim que apagar, exibe a mensagem para o usuário
+            this.mensagem = 'Foto removida com sucesso'
+
+            let indice = this.fotos.indexOf(foto); // acha a posição da foto na lista
+            this.fotos.splice(indice, 1); // a instrução altera o array
+            
+          }, 
+          err => {
+            this.mensagem = 'Não foi possível remover a foto';
+            console.log(err);
+          }
+        )
      
     }
   }
