@@ -45,7 +45,7 @@ export default {
     this.fotoService = new FotoService(this.$resource);
     this.fotoService.lista().then(
         res => (this.fotos = res),
-        err => console.log(err)
+        err => this.mensagem = err.message
       );
   },
   computed: {

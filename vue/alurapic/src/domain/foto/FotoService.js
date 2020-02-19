@@ -4,10 +4,18 @@ export default class FotoService {
   }
 
   lista() {
-    return this._resource.query().then(res => res.json());
+    return this._resource.query().then(res => res.json(),
+      err => {
+        console.log(err);
+        throw new Error('Não foi possível obter as fotos. Tenta mais tarde');
+      }
+    );
   }
 
   cadastra(foto) {
+    if (foto._id) {
+      return this._resource.update({ id: foto._id }, foto);
+    }
     return this._resource.save(foto);
   }
 
