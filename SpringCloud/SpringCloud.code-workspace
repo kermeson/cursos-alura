@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "config-server"
+		},
+		{
+			"path": "eureka"
+		},
+		{
+			"path": "fornecedor"
+		},
+		{
+			"path": "loja"
+		},
+		{
+			"path": "transportador"
+		},
+		{
+			"name": "gateway",
+			"path": "gateway"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.dependency.packagePresentation": "hierarchical",
+		"maven.view": "hierarchical"
+	}
+}
