@@ -1,29 +1,53 @@
 {
-	"folders": [
-		{
-			"path": "config-server"
-		},
-		{
-			"path": "eureka"
-		},
-		{
-			"path": "fornecedor"
-		},
-		{
-			"path": "loja"
-		},
-		{
-			"path": "transportador"
-		},
-		{
-			"name": "gateway",
-			"path": "gateway"
-		}
-	],
-	"settings": {
-		"java.compile.nullAnalysis.mode": "automatic",
-		"java.configuration.updateBuildConfiguration": "automatic",
-		"java.dependency.packagePresentation": "hierarchical",
-		"maven.view": "hierarchical"
-	}
+  "folders": [
+    {
+      "path": "config-server"
+    },
+    {
+      "path": "eureka"
+    },
+    {
+      "path": "fornecedor"
+    },
+    {
+      "path": "loja"
+    },
+    {
+      "path": "transportador"
+    },
+    {
+      "name": "gateway",
+      "path": "gateway"
+    },
+    {
+      "name": "auth",
+      "path": "auth"
+    }
+  ],
+  "settings": {
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.dependency.packagePresentation": "hierarchical",
+    "maven.view": "hierarchical",
+    "java.jdt.ls.java.home": "",
+    "java.configuration.runtimes": [
+      {
+        "name": "JavaSE-11",
+        "path": "C:\\Users\\kermeson.martins\\Documents\\apps\\java\\jdk-17.0.7"
+      },
+      {
+        "name": "JavaSE-1.8",
+        "path": "C:\\Users\\kermeson.martins\\Documents\\apps\\java\\jdk1.8.0_241"
+      }
+    ],
+    "java.saveActions.organizeImports": true,
+    "java.completion.filteredTypes": [
+      "java.awt.*",
+      "com.sun.*",
+      "sun.*",
+      "jdk.*",
+      "org.graalvm.*",
+      "io.micrometer.shaded.*"
+    ],
+  }
 }

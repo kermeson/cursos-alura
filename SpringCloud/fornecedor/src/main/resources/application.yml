@@ -1,6 +1,28 @@
 server:
   port: 8181
 
+spring:
+  application:
+    name: "fornecedor"
+  profiles:
+    active: default
+  config:
+    import: "optional:configserver:"
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          client-id: 8ffe59851b0c0af67c6c
+          client-secret: 3bca507276d467ec88f601ab1896ed7f4beefd66
+          introspection-uri: https://github.com/login/oauth/access_token
+
+  # security:
+  #   oauth2:
+  #     client:
+  #       registration:
+  #         github:
+  #           clientId: 8ffe59851b0c0af67c6c
+  #           clientSecret: 3bca507276d467ec88f601ab1896ed7f4beefd66
 eureka:
   client:
     register-with-eureka: true

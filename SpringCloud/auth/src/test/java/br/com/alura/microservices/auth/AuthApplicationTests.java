@@ -1,13 +1,13 @@
-package br.com.alura.microservice.fornecedor;
+package br.com.alura.microservices.auth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class FornecedorApplicationTests {
+class AuthApplicationTests {
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 	}
 
 }
